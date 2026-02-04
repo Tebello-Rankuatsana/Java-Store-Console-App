@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class DBManager {
 
-    private final String URL = "jdbc:postgresql://localhost:5432/storedb";
+    private final String URL = "jdbc:postgresql://localhost:5432/storedb"; //connecting pgAdmin
     private final String USER = "postgres";
     private final String PASSWORD = "anime";
 
@@ -11,7 +11,7 @@ public class DBManager {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 
-    // LOAD products from DB into ArrayList
+    // this is for fetching products and returning them as arrays
     public ArrayList<Product> getProducts() {
         ArrayList<Product> list = new ArrayList<>();
 
@@ -20,6 +20,7 @@ public class DBManager {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM products");
 
+//          iterating through each database row then creates a product object for each row
             while (rs.next()) {
                 list.add(new Product(
                         rs.getInt("id"),
@@ -29,14 +30,15 @@ public class DBManager {
                 ));
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e);
         }
         return list;
     }
 
-    // ADMIN: add product
+    // admin: adding products
     public void addProduct(String name, double price, int qty) {
         try {
+//            what sir showed us
             Connection con = connect();
             PreparedStatement ps =
                     con.prepareStatement(
@@ -45,26 +47,27 @@ public class DBManager {
             ps.setString(1, name);
             ps.setDouble(2, price);
             ps.setInt(3, qty);
-            ps.executeUpdate();
+            ps.executeUpdate();//executes the sql command and updates the database
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e);
         }
     }
 
-    // ADMIN: delete product
+    // admin: deleting products
     public void deleteProduct(int id) {
         try {
             Connection con = connect();
             PreparedStatement ps =
                     con.prepareStatement("DELETE FROM products WHERE id=?");
+//            supplies the id
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e);
         }
     }
 
-    // USER: buy product
+    // user: buying products
     public boolean buyProduct(int id) {
         try {
             Connection con = connect();
@@ -86,7 +89,7 @@ public class DBManager {
                 return true;
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println("ERROR: "+e);
         }
         return false;
     }

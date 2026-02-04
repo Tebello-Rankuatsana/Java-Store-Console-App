@@ -17,8 +17,8 @@ public class Main {
         System.out.print("Password: ");
         String pass = sc.nextLine();
 
-        // ADMIN
-        if (role == 1 && pass.equals("admin123")) {
+        // admin credentials checker
+        if (role == 1 && pass.equals("kali")) {
 
             System.out.println("1. Add Product");
             System.out.println("2. Remove Product");
@@ -45,8 +45,8 @@ public class Main {
 
         }
 
-        // USER
-        else if (role == 2 && pass.equals("user123")) {
+        // user credentials checker
+        else if (role == 2 && pass.equals("torvalds")) {
 
             ArrayList<Product> products = db.getProducts();
 
@@ -54,17 +54,17 @@ public class Main {
                 System.out.println(p);
             }
 
-            System.out.print("Enter product ID to buy: ");
+            System.out.print("Enter product id: ");
             int id = sc.nextInt();
 
             if (db.buyProduct(id)) {
-                System.out.println("Purchase successful!");
+                System.out.println("successful");
             } else {
-                System.out.println("Out of stock!");
+                System.out.println("ran out");
             }
 
         } else {
-            System.out.println("Access denied.");
+            System.out.println("Mxm!!");
         }
 
         sc.close();

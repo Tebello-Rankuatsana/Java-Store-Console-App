@@ -11,10 +11,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
     public String toString() {
         return id + ". " + name +
                 " | Price: " + price +
