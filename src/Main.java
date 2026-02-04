@@ -18,7 +18,7 @@ public class Main {
         String pass = sc.nextLine();
 
         // admin credentials checker
-        if (role == 1 && pass.equals("kali")) {
+        if (role == 1 && pass.equals("iamroot123")) {
 
             System.out.println("1. Add Product");
             System.out.println("2. Remove Product");
